@@ -12,6 +12,16 @@
 
                 </div><!-- /.row -->
 
+                @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4>
+                            <i class="icon fa fa-check"></i>{{ session('success') }}
+                        </h4>
+
+                    </div>
+                @endif
+
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
@@ -36,7 +46,7 @@
                                             Название
                                         </th>
 
-                                        <th style="width: 30%">
+                                        <th style="width: 40%">
                                         </th>
                                     </tr>
                                 </thead>
@@ -57,16 +67,22 @@
                                                     </i>
                                                     View
                                                 </a>-->
-                                            <a class="btn btn-info btn-sm" href="#">
+                                                <div class="m-1 row">
+                                            <a class="btn btn-info btn-sm m-1" href="{{ route('categories.edit', $categories['id']) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Редактировать
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
+                                            
+                                            <form action="{{ route('categories.destroy', $categories['id']) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm delete-btn m-1">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Удалить
-                                            </a>
+                                                </button>
+                                            </form></div>                                            
                                         </td>
                                     </tr>
                                     @endforeach

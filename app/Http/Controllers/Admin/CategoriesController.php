@@ -36,7 +36,7 @@ class CategoriesController extends Controller
         $new_category->title = $request->title;
         $new_category->save();
 
-        return redirect()->back()->withSuccess('Категория была успешно добавлена');
+        return redirect()->back()->withSuccess('Категория добавлена');
     }
 
     /**
@@ -52,7 +52,9 @@ class CategoriesController extends Controller
      */
     public function edit(Categories $categories)
     {
-        //
+        return view('admin.categories.edit', [
+            'categories'=>$categories
+        ]);
     }
 
     /**
@@ -60,7 +62,10 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categories $categories)
     {
-        //
+        $categories->title = $request->title;
+        $categories->save();
+
+        return redirect()->back()->withSuccess('Категория обновлена');
     }
 
     /**
@@ -68,6 +73,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $categories)
     {
-        //
+        $categories->delete();
+        return redirect()->back()->withSuccess('Категория была успешно удалена');
     }
 }

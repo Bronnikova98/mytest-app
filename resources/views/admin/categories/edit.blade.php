@@ -1,6 +1,6 @@
 @extends ('layouts.admin_layout')
 
-@section('title', 'Добавить категорию')
+@section('title', 'Редактирование категории')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Добавить категорию</h1>
+                    <h1 class="m-0">Редактирование категории: {{ $categories['title'] }}</h1>
 
                 </div><!-- /.row -->
 
@@ -33,19 +33,20 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class='card card-primary'>
-                            <form action="{{ route('categories.store') }}" method="POST">
+                            <form action="{{ route('categories.update', $categories['id']) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputTitle">Название</label>
-                                        <input type="text" name="title" class="form-control" id="exampleInputTitle"
+                                        <input type="text" value="{{ $categories['title'] }}" name="title" class="form-control" id="exampleInputTitle"
                                             placeholder="Введите название категории" required>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Добавить</button>
+                                    <button type="submit" class="btn btn-primary">Обновить</button>
                                 </div>
                             </form>
                         </div>
