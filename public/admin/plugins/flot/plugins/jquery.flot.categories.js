@@ -1,4 +1,4 @@
-/* Flot plugin for plotting textual data or categories.
+/* Flot plugin for plotting textual data or category.
 
 Copyright (c) 2007-2014 IOLA and Ole Laursen.
 Licensed under the MIT license.
@@ -6,29 +6,29 @@ Licensed under the MIT license.
 Consider a dataset like [["February", 34], ["March", 20], ...]. This plugin
 allows you to plot such a dataset directly.
 
-To enable it, you must specify mode: "categories" on the axis with the textual
+To enable it, you must specify mode: "category" on the axis with the textual
 labels, e.g.
 
-    $.plot("#placeholder", data, { xaxis: { mode: "categories" } });
+    $.plot("#placeholder", data, { xaxis: { mode: "category" } });
 
 By default, the labels are ordered as they are met in the data series. If you
-need a different ordering, you can specify "categories" on the axis options
-and list the categories there:
+need a different ordering, you can specify "category" on the axis options
+and list the category there:
 
     xaxis: {
-        mode: "categories",
-        categories: ["February", "March", "April"]
+        mode: "category",
+        category: ["February", "March", "April"]
     }
 
-If you need to customize the distances between the categories, you can specify
-"categories" as an object mapping labels to values
+If you need to customize the distances between the category, you can specify
+"category" as an object mapping labels to values
 
     xaxis: {
-        mode: "categories",
-        categories: { "February": 1, "March": 3, "April": 4 }
+        mode: "category",
+        category: { "February": 1, "March": 3, "April": 4 }
     }
 
-If you don't specify all categories, the remaining categories will be numbered
+If you don't specify all category, the remaining category will be numbered
 from the max value plus 1 (with a spacing of 1 between each).
 
 Internally, the plugin works by transforming the input data through an auto-
@@ -36,32 +36,32 @@ generated mapping where the first category becomes 0, the second 1, etc.
 Hence, a point like ["February", 34] becomes [0, 34] internally in Flot (this
 is visible in hover and click events that return numbers rather than the
 category labels). The plugin also overrides the tick generator to spit out the
-categories as ticks instead of the values.
+category as ticks instead of the values.
 
 If you need to map a value back to its label, the mapping is always accessible
-as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
+as "category" on the axis object, e.g. plot.getAxes().xaxis.category.
 
 */
 
 (function ($) {
     var options = {
         xaxis: {
-            categories: null
+            category: null
         },
         yaxis: {
-            categories: null
+            category: null
         }
     };
 
     function processRawData(plot, series, data, datapoints) {
-        // if categories are enabled, we need to disable
+        // if category are enabled, we need to disable
         // auto-transformation to numbers so the strings are intact
         // for later processing
 
-        var xCategories = series.xaxis.options.mode === "categories",
-            yCategories = series.yaxis.options.mode === "categories";
+        var xcategory = series.xaxis.options.mode === "category",
+            ycategory = series.yaxis.options.mode === "category";
 
-        if (!(xCategories || yCategories)) {
+        if (!(xcategory || ycategory)) {
             return;
         }
 
@@ -87,33 +87,33 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
         }
 
         for (var m = 0; m < format.length; ++m) {
-            if (format[m].x && xCategories) {
+            if (format[m].x && xcategory) {
                 format[m].number = false;
             }
 
-            if (format[m].y && yCategories) {
+            if (format[m].y && ycategory) {
                 format[m].number = false;
                 format[m].computeRange = false;
             }
         }
     }
 
-    function getNextIndex(categories) {
+    function getNextIndex(category) {
         var index = -1;
 
-        for (var v in categories) {
-            if (categories[v] > index) {
-                index = categories[v];
+        for (var v in category) {
+            if (category[v] > index) {
+                index = category[v];
             }
         }
 
         return index + 1;
     }
 
-    function categoriesTickGenerator(axis) {
+    function categoryTickGenerator(axis) {
         var res = [];
-        for (var label in axis.categories) {
-            var v = axis.categories[label];
+        for (var label in axis.category) {
+            var v = axis.category[label];
             if (v >= axis.min && v <= axis.max) {
                 res.push([v, label]);
             }
@@ -124,14 +124,14 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
         return res;
     }
 
-    function setupCategoriesForAxis(series, axis, datapoints) {
-        if (series[axis].options.mode !== "categories") {
+    function setupcategoryForAxis(series, axis, datapoints) {
+        if (series[axis].options.mode !== "category") {
             return;
         }
 
-        if (!series[axis].categories) {
+        if (!series[axis].category) {
             // parse options
-            var c = {}, o = series[axis].options.categories || {};
+            var c = {}, o = series[axis].options.category || {};
             if ($.isArray(o)) {
                 for (var i = 0; i < o.length; ++i) {
                     c[o[i]] = i;
@@ -142,24 +142,24 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
                 }
             }
 
-            series[axis].categories = c;
+            series[axis].category = c;
         }
 
         // fix ticks
         if (!series[axis].options.ticks) {
-            series[axis].options.ticks = categoriesTickGenerator;
+            series[axis].options.ticks = categoryTickGenerator;
         }
 
-        transformPointsOnAxis(datapoints, axis, series[axis].categories);
+        transformPointsOnAxis(datapoints, axis, series[axis].category);
     }
 
-    function transformPointsOnAxis(datapoints, axis, categories) {
+    function transformPointsOnAxis(datapoints, axis, category) {
         // go through the points, transforming them
         var points = datapoints.points,
             ps = datapoints.pointsize,
             format = datapoints.format,
             formatColumn = axis.charAt(0),
-            index = getNextIndex(categories);
+            index = getNextIndex(category);
 
         for (var i = 0; i < points.length; i += ps) {
             if (points[i] == null) {
@@ -173,19 +173,19 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
                     continue;
                 }
 
-                if (!(val in categories)) {
-                    categories[val] = index;
+                if (!(val in category)) {
+                    category[val] = index;
                     ++index;
                 }
 
-                points[i + m] = categories[val];
+                points[i + m] = category[val];
             }
         }
     }
 
     function processDatapoints(plot, series, datapoints) {
-        setupCategoriesForAxis(series, "xaxis", datapoints);
-        setupCategoriesForAxis(series, "yaxis", datapoints);
+        setupcategoryForAxis(series, "xaxis", datapoints);
+        setupcategoryForAxis(series, "yaxis", datapoints);
     }
 
     function init(plot) {
@@ -196,7 +196,7 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
     $.plot.plugins.push({
         init: init,
         options: options,
-        name: 'categories',
+        name: 'category',
         version: '1.0'
     });
 })(jQuery);

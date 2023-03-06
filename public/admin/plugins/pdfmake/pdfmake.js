@@ -21655,12 +21655,12 @@ var _base64Js = _interopRequireDefault(__webpack_require__(9742));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var categories = ["Cc", "Zs", "Po", "Sc", "Ps", "Pe", "Sm", "Pd", "Nd", "Lu", "Sk", "Pc", "Ll", "So", "Lo", "Pi", "Cf", "No", "Pf", "Lt", "Lm", "Mn", "Me", "Mc", "Nl", "Zl", "Zp", "Cs", "Co"];
+var category = ["Cc", "Zs", "Po", "Sc", "Ps", "Pe", "Sm", "Pd", "Nd", "Lu", "Sk", "Pc", "Ll", "So", "Lo", "Pi", "Cf", "No", "Pf", "Lt", "Lm", "Mn", "Me", "Mc", "Nl", "Zl", "Zp", "Cs", "Co"];
 var combiningClasses = ["Not_Reordered", "Above", "Above_Right", "Below", "Attached_Above_Right", "Attached_Below", "Overlay", "Iota_Subscript", "Double_Below", "Double_Above", "Below_Right", "Above_Left", "CCC10", "CCC11", "CCC12", "CCC13", "CCC14", "CCC15", "CCC16", "CCC17", "CCC18", "CCC19", "CCC20", "CCC21", "CCC22", "CCC23", "CCC24", "CCC25", "CCC30", "CCC31", "CCC32", "CCC27", "CCC28", "CCC29", "CCC33", "CCC34", "CCC35", "CCC36", "Nukta", "Virama", "CCC84", "CCC91", "CCC103", "CCC107", "CCC118", "CCC122", "CCC129", "CCC130", "CCC132", "Attached_Above", "Below_Left", "Left", "Kana_Voicing", "CCC26", "Right"];
 var scripts = ["Common", "Latin", "Bopomofo", "Inherited", "Greek", "Coptic", "Cyrillic", "Armenian", "Hebrew", "Arabic", "Syriac", "Thaana", "Nko", "Samaritan", "Mandaic", "Devanagari", "Bengali", "Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala", "Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "Hangul", "Ethiopic", "Cherokee", "Canadian_Aboriginal", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid", "Tagbanwa", "Khmer", "Mongolian", "Limbu", "Tai_Le", "New_Tai_Lue", "Buginese", "Tai_Tham", "Balinese", "Sundanese", "Batak", "Lepcha", "Ol_Chiki", "Braille", "Glagolitic", "Tifinagh", "Han", "Hiragana", "Katakana", "Yi", "Lisu", "Vai", "Bamum", "Syloti_Nagri", "Phags_Pa", "Saurashtra", "Kayah_Li", "Rejang", "Javanese", "Cham", "Tai_Viet", "Meetei_Mayek", "null", "Linear_B", "Lycian", "Carian", "Old_Italic", "Gothic", "Old_Permic", "Ugaritic", "Old_Persian", "Deseret", "Shavian", "Osmanya", "Osage", "Elbasan", "Caucasian_Albanian", "Linear_A", "Cypriot", "Imperial_Aramaic", "Palmyrene", "Nabataean", "Hatran", "Phoenician", "Lydian", "Meroitic_Hieroglyphs", "Meroitic_Cursive", "Kharoshthi", "Old_South_Arabian", "Old_North_Arabian", "Manichaean", "Avestan", "Inscriptional_Parthian", "Inscriptional_Pahlavi", "Psalter_Pahlavi", "Old_Turkic", "Old_Hungarian", "Hanifi_Rohingya", "Old_Sogdian", "Sogdian", "Elymaic", "Brahmi", "Kaithi", "Sora_Sompeng", "Chakma", "Mahajani", "Sharada", "Khojki", "Multani", "Khudawadi", "Grantha", "Newa", "Tirhuta", "Siddham", "Modi", "Takri", "Ahom", "Dogra", "Warang_Citi", "Nandinagari", "Zanabazar_Square", "Soyombo", "Pau_Cin_Hau", "Bhaiksuki", "Marchen", "Masaram_Gondi", "Gunjala_Gondi", "Makasar", "Cuneiform", "Egyptian_Hieroglyphs", "Anatolian_Hieroglyphs", "Mro", "Bassa_Vah", "Pahawh_Hmong", "Medefaidrin", "Miao", "Tangut", "Nushu", "Duployan", "SignWriting", "Nyiakeng_Puachue_Hmong", "Wancho", "Mende_Kikakui", "Adlam"];
 var eaw = ["N", "Na", "A", "W", "H", "F"];
 var data = {
-  categories: categories,
+  category: category,
   combiningClasses: combiningClasses,
   scripts: scripts,
   eaw: eaw
@@ -21680,7 +21680,7 @@ var bits = function bits(n) {
 
 var buildUnicodeProperties = function buildUnicodeProperties(data, trie) {
   // compute the number of bits stored for each field
-  var CATEGORY_BITS = bits(data.categories.length - 1);
+  var CATEGORY_BITS = bits(data.category.length - 1);
   var COMBINING_BITS = bits(data.combiningClasses.length - 1);
   var SCRIPT_BITS = bits(data.scripts.length - 1);
   var EAW_BITS = bits(data.eaw.length - 1);
@@ -21698,7 +21698,7 @@ var buildUnicodeProperties = function buildUnicodeProperties(data, trie) {
 
   var getCategory = function getCategory(codePoint) {
     var val = trie.get(codePoint);
-    return data.categories[val >> CATEGORY_SHIFT & CATEGORY_MASK];
+    return data.category[val >> CATEGORY_SHIFT & CATEGORY_MASK];
   };
 
   var getCombiningClass = function getCombiningClass(codePoint) {
@@ -64026,7 +64026,7 @@ var isCombiningV = function isCombiningV(code) {
 
 var isCombiningT = function isCombiningT(code) {
   return 1 <= code && code <= T_END;
-}; // Character categories
+}; // Character category
 
 
 var X = 0; // Other character
@@ -64042,7 +64042,7 @@ var LV = 4; // Composed <LV> syllable
 var LVT = 5; // Composed <LVT> syllable
 
 var M = 6; // Tone mark
-// This function classifies a character using the above categories.
+// This function classifies a character using the above category.
 
 function getType(code) {
   if (isL(code)) {
@@ -64243,7 +64243,7 @@ var indicMachine = {
   accepting: accepting,
   tags: tags
 };
-var categories = ["O", "IND", "S", "GB", "B", "FM", "CGJ", "VMAbv", "VMPst", "VAbv", "VPst", "CMBlw", "VPre", "VBlw", "H", "VMBlw", "CMAbv", "MBlw", "CS", "R", "SUB", "MPst", "MPre", "FAbv", "FPst", "FBlw", "null", "SMAbv", "SMBlw", "VMPre", "ZWNJ", "ZWJ", "WJ", "M", "VS", "N", "HN", "MAbv"];
+var category = ["O", "IND", "S", "GB", "B", "FM", "CGJ", "VMAbv", "VMPst", "VAbv", "VPst", "CMBlw", "VPre", "VBlw", "H", "VMBlw", "CMAbv", "MBlw", "CS", "R", "SUB", "MPst", "MPre", "FAbv", "FPst", "FBlw", "null", "SMAbv", "SMBlw", "VMPre", "ZWNJ", "ZWJ", "WJ", "M", "VS", "N", "HN", "MAbv"];
 var decompositions = {
   "2507": [2503, 2494],
   "2508": [2503, 2519],
@@ -64294,7 +64294,7 @@ var stateTable$1 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 var accepting$1 = [false, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
 var tags$1 = [[], ["broken_cluster"], ["independent_cluster"], ["symbol_cluster"], ["standard_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], [], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["broken_cluster"], ["numeral_cluster"], ["broken_cluster"], ["independent_cluster"], ["symbol_cluster"], ["symbol_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["virama_terminated_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["standard_cluster"], ["broken_cluster"], ["broken_cluster"], ["numeral_cluster"], ["number_joiner_terminated_cluster"], ["standard_cluster"], ["standard_cluster"], ["numeral_cluster"]];
 var useData = {
-  categories: categories,
+  category: category,
   decompositions: decompositions,
   stateTable: stateTable$1,
   accepting: accepting$1,
@@ -64302,7 +64302,7 @@ var useData = {
 }; // Cateories used in the OpenType spec:
 // https://www.microsoft.com/typography/otfntdev/devanot/shaping.aspx
 
-var CATEGORIES = {
+var category = {
   X: 1 << 0,
   C: 1 << 1,
   V: 1 << 2,
@@ -64347,9 +64347,9 @@ var POSITIONS = {
   SMVD: 1 << 14,
   End: 1 << 15
 };
-var CONSONANT_FLAGS = CATEGORIES.C | CATEGORIES.Ra | CATEGORIES.CM | CATEGORIES.V | CATEGORIES.Placeholder | CATEGORIES.Dotted_Circle;
-var JOINER_FLAGS = CATEGORIES.ZWJ | CATEGORIES.ZWNJ;
-var HALANT_OR_COENG_FLAGS = CATEGORIES.H | CATEGORIES.Coeng;
+var CONSONANT_FLAGS = category.C | category.Ra | category.CM | category.V | category.Placeholder | category.Dotted_Circle;
+var JOINER_FLAGS = category.ZWJ | category.ZWNJ;
+var HALANT_OR_COENG_FLAGS = category.H | category.Coeng;
 var INDIC_CONFIGS = {
   Default: {
     hasOldSpec: false,
@@ -64555,7 +64555,7 @@ function setupSyllables(font, glyphs) {
       ++syllable;
 
       for (var i = last; i < start; i++) {
-        glyphs[i].shaperInfo = new IndicInfo(CATEGORIES.X, POSITIONS.End, 'non_indic_cluster', syllable);
+        glyphs[i].shaperInfo = new IndicInfo(category.X, POSITIONS.End, 'non_indic_cluster', syllable);
       }
     }
 
@@ -64572,7 +64572,7 @@ function setupSyllables(font, glyphs) {
     ++syllable;
 
     for (var _i2 = last; _i2 < glyphs.length; _i2++) {
-      glyphs[_i2].shaperInfo = new IndicInfo(CATEGORIES.X, POSITIONS.End, 'non_indic_cluster', syllable);
+      glyphs[_i2].shaperInfo = new IndicInfo(category.X, POSITIONS.End, 'non_indic_cluster', syllable);
     }
   }
 }
@@ -64647,7 +64647,7 @@ function initialReordering(font, glyphs, plan) {
 
       var _i3 = start;
 
-      while (_i3 < end && glyphs[_i3].shaperInfo.category === CATEGORIES.Repha) {
+      while (_i3 < end && glyphs[_i3].shaperInfo.category === category.Repha) {
         _i3++;
       }
 
@@ -64669,7 +64669,7 @@ function initialReordering(font, glyphs, plan) {
     // and has more than one consonant, Ra is excluded from candidates for
     // base consonants.
 
-    if (indicConfig.rephPos !== POSITIONS.Ra_To_Become_Reph && features.rphf && start + 3 <= end && (indicConfig.rephMode === 'Implicit' && !isJoiner(glyphs[start + 2]) || indicConfig.rephMode === 'Explicit' && glyphs[start + 2].shaperInfo.category === CATEGORIES.ZWJ)) {
+    if (indicConfig.rephPos !== POSITIONS.Ra_To_Become_Reph && features.rphf && start + 3 <= end && (indicConfig.rephMode === 'Implicit' && !isJoiner(glyphs[start + 2]) || indicConfig.rephMode === 'Explicit' && glyphs[start + 2].shaperInfo.category === category.ZWJ)) {
       // See if it matches the 'rphf' feature.
       var _g = [glyphs[start].copy(), glyphs[start + 1].copy(), glyphs[start + 2].copy()];
 
@@ -64683,7 +64683,7 @@ function initialReordering(font, glyphs, plan) {
         base = start;
         hasReph = true;
       }
-    } else if (indicConfig.rephMode === 'Log_Repha' && glyphs[start].shaperInfo.category === CATEGORIES.Repha) {
+    } else if (indicConfig.rephMode === 'Log_Repha' && glyphs[start].shaperInfo.category === category.Repha) {
       limit++;
 
       while (limit < end && isJoiner(glyphs[limit])) {
@@ -64726,7 +64726,7 @@ function initialReordering(font, glyphs, plan) {
               }
 
               base = _i4;
-            } else if (start < _i4 && _info.category === CATEGORIES.ZWJ && glyphs[_i4 - 1].shaperInfo.category === CATEGORIES.H) {
+            } else if (start < _i4 && _info.category === category.ZWJ && glyphs[_i4 - 1].shaperInfo.category === category.H) {
               // A ZWJ after a Halant stops the base search, and requests an explicit
               // half form.
               // A ZWJ before a Halant, requests a subjoined form instead, and hence
@@ -64800,7 +64800,7 @@ function initialReordering(font, glyphs, plan) {
 
 
     for (var _i7 = base + 1; _i7 < end; _i7++) {
-      if (glyphs[_i7].shaperInfo.category === CATEGORIES.M) {
+      if (glyphs[_i7].shaperInfo.category === category.M) {
         for (var j = _i7 + 1; j < end; j++) {
           if (isConsonant(glyphs[j])) {
             glyphs[j].shaperInfo.position = POSITIONS.Final_C;
@@ -64837,16 +64837,16 @@ function initialReordering(font, glyphs, plan) {
       var disallowDoubleHalants = plan.unicodeScript !== 'Malayalam';
 
       for (var _i8 = base + 1; _i8 < end; _i8++) {
-        if (glyphs[_i8].shaperInfo.category === CATEGORIES.H) {
+        if (glyphs[_i8].shaperInfo.category === category.H) {
           var _j = void 0;
 
           for (_j = end - 1; _j > _i8; _j--) {
-            if (isConsonant(glyphs[_j]) || disallowDoubleHalants && glyphs[_j].shaperInfo.category === CATEGORIES.H) {
+            if (isConsonant(glyphs[_j]) || disallowDoubleHalants && glyphs[_j].shaperInfo.category === category.H) {
               break;
             }
           }
 
-          if (glyphs[_j].shaperInfo.category !== CATEGORIES.H && _j > _i8) {
+          if (glyphs[_j].shaperInfo.category !== category.H && _j > _i8) {
             // Move Halant to after last consonant.
             var t = glyphs[_i8];
             glyphs.splice.apply(glyphs, [_i8, 0].concat(glyphs.splice(_i8 + 1, _j - _i8)));
@@ -64864,10 +64864,10 @@ function initialReordering(font, glyphs, plan) {
     for (var _i9 = start; _i9 < end; _i9++) {
       var _info3 = glyphs[_i9].shaperInfo;
 
-      if (_info3.category & (JOINER_FLAGS | CATEGORIES.N | CATEGORIES.RS | CATEGORIES.CM | HALANT_OR_COENG_FLAGS & _info3.category)) {
+      if (_info3.category & (JOINER_FLAGS | category.N | category.RS | category.CM | HALANT_OR_COENG_FLAGS & _info3.category)) {
         _info3.position = lastPos;
 
-        if (_info3.category === CATEGORIES.H && _info3.position === POSITIONS.Pre_M) {
+        if (_info3.category === category.H && _info3.position === POSITIONS.Pre_M) {
           // Uniscribe doesn't move the Halant with Left Matra.
           // TEST: U+092B,U+093F,U+094DE
           // We follow.  This is important for the Sinhala
@@ -64900,7 +64900,7 @@ function initialReordering(font, glyphs, plan) {
         }
 
         last = _i10;
-      } else if (glyphs[_i10].shaperInfo.category === CATEGORIES.M) {
+      } else if (glyphs[_i10].shaperInfo.category === category.M) {
         last = _i10;
       }
     }
@@ -64961,7 +64961,7 @@ function initialReordering(font, glyphs, plan) {
       //
       // Test case: U+0924,U+094D,U+0930,U+094d,U+200D,U+0915
       for (var _i15 = start; _i15 + 1 < base; _i15++) {
-        if (glyphs[_i15].shaperInfo.category === CATEGORIES.Ra && glyphs[_i15 + 1].shaperInfo.category === CATEGORIES.H && (_i15 + 1 === base || glyphs[_i15 + 2].shaperInfo.category === CATEGORIES.ZWJ)) {
+        if (glyphs[_i15].shaperInfo.category === category.Ra && glyphs[_i15 + 1].shaperInfo.category === category.H && (_i15 + 1 === base || glyphs[_i15 + 2].shaperInfo.category === category.ZWJ)) {
           glyphs[_i15].features.blwf = true;
           glyphs[_i15 + 1].features.blwf = true;
         }
@@ -64999,7 +64999,7 @@ function initialReordering(font, glyphs, plan) {
 
     for (var _i17 = start + 1; _i17 < end; _i17++) {
       if (isJoiner(glyphs[_i17])) {
-        var nonJoiner = glyphs[_i17].shaperInfo.category === CATEGORIES.ZWNJ;
+        var nonJoiner = glyphs[_i17].shaperInfo.category === category.ZWNJ;
         var _j5 = _i17;
 
         do {
@@ -65087,12 +65087,12 @@ function finalReordering(font, glyphs, plan) {
       }
     }
 
-    if (base === end && start < base && glyphs[base - 1].shaperInfo.category === CATEGORIES.ZWJ) {
+    if (base === end && start < base && glyphs[base - 1].shaperInfo.category === category.ZWJ) {
       base--;
     }
 
     if (base < end) {
-      while (start < base && glyphs[base].shaperInfo.category & (CATEGORIES.N | HALANT_OR_COENG_FLAGS)) {
+      while (start < base && glyphs[base].shaperInfo.category & (category.N | HALANT_OR_COENG_FLAGS)) {
         base--;
       }
     } // o Reorder matras:
@@ -65114,7 +65114,7 @@ function finalReordering(font, glyphs, plan) {
       // We want to position matra after them.
 
       if (plan.unicodeScript !== 'Malayalam' && plan.unicodeScript !== 'Tamil') {
-        while (newPos > start && !(glyphs[newPos].shaperInfo.category & (CATEGORIES.M | HALANT_OR_COENG_FLAGS))) {
+        while (newPos > start && !(glyphs[newPos].shaperInfo.category & (category.M | HALANT_OR_COENG_FLAGS))) {
           newPos--;
         } // If we found no Halant we are done.
         // Otherwise only proceed if the Halant does
@@ -65166,7 +65166,7 @@ function finalReordering(font, glyphs, plan) {
     //   to make it work without the reordering.
 
 
-    if (start + 1 < end && glyphs[start].shaperInfo.position === POSITIONS.Ra_To_Become_Reph && glyphs[start].shaperInfo.category === CATEGORIES.Repha !== (glyphs[start].isLigated && !glyphs[start].isMultiplied)) {
+    if (start + 1 < end && glyphs[start].shaperInfo.position === POSITIONS.Ra_To_Become_Reph && glyphs[start].shaperInfo.category === category.Repha !== (glyphs[start].isLigated && !glyphs[start].isMultiplied)) {
       var newRephPos = void 0;
       var rephPos = indicConfig.rephPos;
       var found = false; // 1. If reph should be positioned after post-base consonant forms,
@@ -65267,7 +65267,7 @@ function finalReordering(font, glyphs, plan) {
 
         if (isHalantOrCoeng(glyphs[newRephPos])) {
           for (var _i20 = base + 1; _i20 < newRephPos; _i20++) {
-            if (glyphs[_i20].shaperInfo.category === CATEGORIES.M) {
+            if (glyphs[_i20].shaperInfo.category === category.M) {
               newRephPos--;
             }
           }
@@ -65308,17 +65308,17 @@ function finalReordering(font, glyphs, plan) {
             // We want to position matra after them.
 
             if (plan.unicodeScript !== 'Malayalam' && plan.unicodeScript !== 'Tamil') {
-              while (_newPos > start && !(glyphs[_newPos - 1].shaperInfo.category & (CATEGORIES.M | HALANT_OR_COENG_FLAGS))) {
+              while (_newPos > start && !(glyphs[_newPos - 1].shaperInfo.category & (category.M | HALANT_OR_COENG_FLAGS))) {
                 _newPos--;
               } // In Khmer coeng model, a H,Ra can go *after* matras.  If it goes after a
               // split matra, it should be reordered to *before* the left part of such matra.
 
 
-              if (_newPos > start && glyphs[_newPos - 1].shaperInfo.category === CATEGORIES.M) {
+              if (_newPos > start && glyphs[_newPos - 1].shaperInfo.category === category.M) {
                 var _oldPos2 = _i21;
 
                 for (var j = base + 1; j < _oldPos2; j++) {
-                  if (glyphs[j].shaperInfo.category === CATEGORIES.M) {
+                  if (glyphs[j].shaperInfo.category === category.M) {
                     _newPos--;
                     break;
                   }
@@ -65364,7 +65364,7 @@ function nextSyllable(glyphs, start) {
   return start;
 }
 
-var categories$1 = useData.categories,
+var category$1 = useData.category,
     decompositions$2 = useData.decompositions;
 var trie$2 = new UnicodeTrie(Buffer("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","base64"));
 var stateMachine$1 = new StateMachine(useData);
@@ -65448,7 +65448,7 @@ function setupSyllables$1(font, glyphs) {
     ++syllable; // Create shaper info
 
     for (var i = start; i <= end; i++) {
-      glyphs[i].shaperInfo = new USEInfo(categories$1[useCategory(glyphs[i])], tags[0], syllable);
+      glyphs[i].shaperInfo = new USEInfo(category$1[useCategory(glyphs[i])], tags[0], syllable);
     } // Assign rphf feature
 
 

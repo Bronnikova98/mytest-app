@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Редактирование категории: {{ $categories['title'] }}</h1>
+                    <h1 class="m-0">Редактирование категории: {{ $category['title'] }}</h1>
 
                 </div><!-- /.row -->
 
@@ -33,13 +33,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class='card card-primary'>
-                            <form action="{{ route('categories.update', $categories['id']) }}" method="POST">
+                            <form action="{{ route('category.update', $category['id']) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputTitle">Название</label>
-                                        <input type="text" value="{{ $categories['title'] }}" name="title" class="form-control" id="exampleInputTitle"
+                                        <input type="text" value="{{ $category['title'] }}" name="title" class="form-control" id="exampleInputTitle"
                                             placeholder="Введите название категории" required>
                                     </div>
                                 </div>

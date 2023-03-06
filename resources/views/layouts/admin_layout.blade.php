@@ -103,13 +103,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('categories.index')}}" class="nav-link">
+                <a href="{{route('category.index')}}" class="nav-link">
                   
                   <p>Все категории</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('categories.create')}}" class="nav-link">
+                <a href="{{route('category.create')}}" class="nav-link">
                   
                   <p>Добавить категорию</p>
                 </a>

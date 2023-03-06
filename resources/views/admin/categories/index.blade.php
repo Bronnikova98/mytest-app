@@ -52,13 +52,13 @@
                                 </thead>
                                 <tbody>
 
-                                @foreach ($all_categories as $categories)
+                                @foreach ($categories as $category)
                                     <tr>
                                         <td>
-                                            {{$categories['id']}}
+                                            {{$category['id']}}
                                         </td>
                                         <td>
-                                            {{$categories['title']}}
+                                            {{$category['title']}}
                                         </td>
                                             <td class="project-actions text-right">
                                                 <!--
@@ -68,13 +68,13 @@
                                                     View
                                                 </a>-->
                                                 <div class="m-1 row">
-                                            <a class="btn btn-info btn-sm m-1" href="{{ route('categories.edit', $categories['id']) }}">
+                                            <a class="btn btn-info btn-sm m-1" href="{{ route('category.edit', $category['id']) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Редактировать
                                             </a>
                                             
-                                            <form action="{{ route('categories.destroy', $categories['id']) }}" method="POST">
+                                            <form action="{{ route('category.destroy', $category['id']) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm delete-btn m-1">

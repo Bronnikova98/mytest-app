@@ -164,7 +164,7 @@
     " TimeStampFormat LogEventTypes SourceInfoFormat" +
     " LogEntityName LogSourceInfo DiskFullAction" +
     " LogFileNumber LogFileSize MatchingHints Detailed" +
-    " Compact SubCategories Stack Single None Seconds" +
+    " Compact SubCategory Stack Single None Seconds" +
     " DateTime Time Stop Error Retry Delete TCPPort KillTimer" +
     " NumHCs UnixSocketsEnabled LocalAddress"),
     fileNCtrlMaskOptions: words("TTCN_EXECUTOR TTCN_ERROR TTCN_WARNING" +

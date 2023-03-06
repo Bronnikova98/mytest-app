@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class='card card-primary'>
-                            <form action="{{ route('categories.store') }}" method="POST">
+                            <form action="{{ route('category.store') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
