@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $categories = Category::orderBy('created_at', 'desc')->get();
 
-        return view('admin.categories.index', [
+        return view('admin.category.index', [
             'categories' => $categories
         ]);
     }
@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.category.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', [
+        return view('admin.category.edit', [
             'category' => $category
         ]);
     }

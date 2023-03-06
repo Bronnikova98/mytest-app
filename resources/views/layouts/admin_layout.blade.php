@@ -23,8 +23,8 @@
   <link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/admin/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="/admin/plugins/summernote/summernote-bs4.min.css">
+  <!-- colorbox -->
+  <link href="/admin/dist/css/colorbox.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -81,13 +81,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="{{route('post.index')}}" class="nav-link">
                   
                   <p>Все статьи</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{ route('post.create') }}" class="nav-link">
                   
                   <p>Добавить статью</p>
                 </a>
@@ -103,7 +103,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('category.index')}}" class="nav-link">
+                <a href="{{ route('category.index') }}" class="nav-link">
                   
                   <p>Все категории</p>
                 </a>
@@ -172,7 +172,12 @@
 <script src="/admin/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/admin/dist/js/pages/dashboard.js"></script>
-<!-- Для проверки активности -->
+<!-- barryvdh/elfinder-->
+<script type="text/javascript" src="/admin/dist/js/jquery.colorbox-min.js"></script>
+<!-- TinyMCE для текстовой области-->
+<script src="https://cdn.tiny.cloud/1/sx86qgibho6thc9b7lihv1070jb0ytfs6u1rl6e03ai9wgot/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.js"></script>
+<!-- Админ js -->
 <script src="/admin/admin.js"></script>
 </body>
 </html>
